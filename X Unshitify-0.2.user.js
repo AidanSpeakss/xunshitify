@@ -20,27 +20,29 @@ function unshitify(){
 
     //Make sure to set your username so that your individual tweets aren't removed when viewing them.
     let yourUsername = "AidanOsint";
-    if (!window.location.href.includes(yourUsername)){
+    if (window.location.href.includes(yourUsername) != true){
         //Hides the individual tweets as well, in-case the feed magically comes back (can happen)
-        newStyles.innerText += `div:has(div[data-testid="tweetText"]) { display: none !important; }`;
+        newStyles.innerText += `div[data-testid="tweetText"] { display: none !important; }`;
     }
 
     //Hides the infinite scroll feed, still allows you to post, but causes extreme lag for some reason when writing the post in the chatbot. Better to prepare posts seperately or schedule them on Buffer.
     newStyles.innerText += `div[aria-label="Timeline: Your Home Timeline"] { display: none !important; }`;
 
-    //Hides the number badges on the notification icon, which is a feature meant to draw your attention and interrupt your focus.
+    //Hides the new posts nudge that appears on the timeline, acts as a another nudge to draw your attention and interrupt your focus.
     newStyles.innerText += `button[aria-label="New posts are available. Push the period key to go to the them."] { display: none !important; }`;
+
+    //Hides the number badges on the notification icon, which is a feature meant to draw your attention and interrupt your focus.
+    newStyles.innerText += `div[aria-label$="unread items"] { display: none !important; }`;
 
     //Hides the entire trending section sidebar
     newStyles.innerText += `div[aria-label="Trending"] { display: none !important; }`;
-
-    //Hides the whats happening section
-    //newStyles.innerText += `div[aria-label="Timeline: Trending now"] { display: none !important; }`;
 
     document.head.appendChild(newStyles);
 
     //This will force a redraw and flash the page for a second after new styles are added, fixes content being shown even when it shouldn't.
     document.body.style.display = 'none';
+
+    //To-Do: Add mutationObserver to detect changes to the page title and revert them (would remove the only remaining nudge on the platform).
 }
 
 unshitify();
