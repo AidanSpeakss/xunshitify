@@ -25,7 +25,7 @@ function unshitify(){
         newStyles.innerText += `div[data-testid="tweetText"] { display: none !important; }`;
     }
 
-    //Hides the infinite scroll feed, still allows you to post, but causes extreme lag for some reason when writing the post in the chatbot. Better to prepare posts seperately or schedule them on Buffer.
+    //Hides the infinite scroll feed, still allows you to post, but causes extreme lag for some reason when writing the post in the chatbox. Better to prepare posts seperately or schedule them on Buffer.
     newStyles.innerText += `div[aria-label="Timeline: Your Home Timeline"] { display: none !important; }`;
 
     //Hides the new posts nudge that appears on the timeline, acts as a another nudge to draw your attention and interrupt your focus.
